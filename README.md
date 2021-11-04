@@ -1,3 +1,8 @@
+Resposta ao desafio de Criação de uma loja vitual de refrigerantes.
+Utilizado HTML5, CSS3 e Javascript.
+
+Daniel Teixeira Quadros.
+
 # Bem vindo ao teste de JS da Adsim
 
 Objetivo deste teste é medir seu conhecimento na área de HTML, javascript, css e boas práticas com essas tecnoligias.
