@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<title>Adsim - Teste de JS</title>
+</head>
+<body >
+	<header>
+		<div class="hd">
+		  	<h1>Carrinho de Compras</h1>
+		  	<img id= "car"src="assets/images/carrinho.png" alt=""/>
+	 	</div>
+	</header>
+    <div class="tb">
+    	<form action="#" method="GET" id="formSoda">
+			<table>
+				<thead>
+					<tr>
+						<td>Refrigerante</td>
+						<td>Quantidade</td>
+						<td>Preço Unitário</td>
+						<td>Total</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<select name="sel1" id="line1" onchange="listPrice1(stock)">
+					
+							</select>
+						</td>
+						<td><input name="qt1" id="quant1" type="number" value="" placeholder="0" onchange="listQuant1(stock)" ></td>
+						<td><input type="text" name="pr1" id="price1" value="R$ 0,00" readonly> </td>
+						<td><input type="text" name="tot1" id="totalItem1" data-val="" onchange="totalG()" value="" placeholder="R$ 0,00" readonly> </td>
+					</tr>
+					<tr>
+						<td>
+							<select name="sel2" id="line2" onchange="listPrice2(stock)">
+					
+							</select>
+						</td>
+						<td><input name="qt2" id="quant2" type="number" value="" placeholder="0" onchange="listQuant2(stock)" ></td>
+						<td><input type="text" name="pr2" id="price2" value="R$ 0,00" readonly> </td>
+						<td><input type="text" name="tot2" id="totalItem2" data-val="" onchange="totalG()" value="" placeholder="R$ 0,00" readonly> </td>
+					</tr>
+					<tr>
+						<td>
+							<select name="sel3" id="line3" onchange="listPrice3(stock)">
+					
+							</select>
+						</td>
+						<td><input name="qt3" id="quant3" type="number" value="" placeholder="0" onchange="listQuant3(stock)" ></td>
+						<td><input type="text" name="pr3" id="price3" value="R$ 0,00" readonly> </td>
+						<td><input type="text" name="tot3" id="totalItem3" data-val="" onchange="totalG()" value="" placeholder="R$ 0,00" readonly> </td>
+					</tr>
+					<tr>
+						<td>
+							<select name="sel4" id="line4" onchange="listPrice4(stock)">
+					
+							</select>
+						</td>
+						<td><input name="qt4" id="quant4" type="number" value="" placeholder="0" onchange="listQuant4(stock)" ></td>
+						<td><input type="text" name="pr4" id="price4" value="R$ 0,00" readonly> </td>
+						<td><input type="text" name="tot4" id="totalItem4" data-val="" onchange="totalG()" value="" placeholder="R$ 0,00" readonly> </td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><button id="btn" onclick="totalG()">Calcular Total</button></td>
+						<td><input type="text" name="totG" id="totalGeral" value="" placeholder="R$ 0,00" readonly></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><input id="btn"type="submit" value="Finalizar Compra"></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+    </div>
+	<div class="markt">
+		<div> <img src="assets/images/logococa.png" alt="Coca-Cola"></div>
+		<div> <img src="assets/images/logofanta.png" alt="Fanta"></div>
+		<div> <img src="assets/images/logoPureza.png" alt="Pureza"></div>
+		<div> <img src="assets/images/logoSprite.png" alt="Sprite"></div>
+		<div> <img src="assets/images/soda.png" alt="Soda"></div>
+		<div><img src="assets/images/guarana-logo-antartica.png" alt="Antártica"></div>
+	</div>
+	<footer>
+		<div class="footer_copy">
+			Copyright - 2021 - Todos os direitos reservados
+		</div>
+	   </footer>
+	<script type="text/javascript" src="assets/js/script.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
