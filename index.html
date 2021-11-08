@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <title>Loja de Refrigerantes</title>
+
+</head>
+<body>
+    <header>
+        <h1>
+            <div class="hd">
+                <h1>Loja de Refrigerantes</h1>      
+           </div>
+        </h1>
+    </header>
+    <main>
+        <div class="title">
+            <h2>Catálogo</h2>
+        </div>
+        <div class="card">
+            <div class="lineInput">   
+                <label for="line1">Produtos</label>
+                <select id="line1" onchange="listPrice1(stock)" required></select>
+            </div>
+            <div class="lineInput">
+                <label for="quant1">Quantidade</label>
+                <input id="quant1" type="number" placeholder="0" onchange="listQuant1(stock)" required min="1">
+            </div>
+            <div class="lineInput">
+                <label for="price1">Preço Unidade</label>
+                <input type="text" id="price1" value="R$ 0,00" readonly>
+            </div>
+            <div class="lineInput">
+                <label for="totalItem1">Preço Total</label>
+                <input type="text" id="totalItem1" value="R$ 0,00" readonly>
+            </div>
+            <button onclick="listQuant1(stock)">Calcular</button>
+            <button onclick="addProd(product), ended()">Adicionar</button> 
+        </div>
+        <div class="car">
+            <h2>Carrinho de Compras</h2>
+            <img src="assets/images/carrinho.png" alt="">
+        </div>
+        <form action="#" method="GET" id="formSoda">
+            <div class="tb">
+                <table>
+                    <thead>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Qnt</th>
+                        <th>Und</th>
+                        <th>Total</th>
+                        <th>Ações</th>
+                    </thead>
+                    <tbody id="tbody">
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div class="lineInput">
+                <br>
+                <label for="priceTotal">Total Compras</label>
+                <input type="text" name="prt" id="priceTotal" value="0" placeholder="R$ 0,00" readonly>           
+            </div>
+            <input id="btn" type="submit" value="Finalizar Compra">
+        </form>
+    </main> 
+    <footer>Copyright - Todos os direitos reservados.</footer>   
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
