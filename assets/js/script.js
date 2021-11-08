@@ -100,14 +100,15 @@ function addProd(product){
 
 //Função responsável por excluir um item específico do carrinho de compras
 // IMCOMPLETA"!!!
-/*function delet(product, item){
-    for(let i = 0; i < product.length; i++){
+function delet(product, item){
+    console.log('Função incompleta')
+    /*for(let i = 0; i < product.length; i++){
         if(product[i].id == item){
             product.splice(i, 1)
         }
     }
-    console.log(product)
-}*/
+    console.log(product)*/
+}
 
 //Função que adiciona e atualiza o valor do campo Total de Compras
 function ended() {
