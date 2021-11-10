@@ -9,81 +9,76 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
     <title>Loja de Refrigerantes</title>
-
 </head>
 <body>
     <header>
-            <div class="hd">
-                <h1>Loja de Refrigerantes</h1>      
-           </div>
-        
-        </header>
-        <main class="container">
-                <h2>Catálogo</h2>   
-                <div class="cat">
-                        <div class="lineInput">
-                            <label for="line1">Produtos</label>
-                            <select id="line1" onchange="listPrice1(stock)" required></select>
-                        </div>
-               
-                <div class="lineInput">
-                    <label for="quant1">Quantidade</label>
-                    <input id="quant1" type="number" placeholder="0" onchange="listQuant1(stock)" required min="1">
-                </div>
-                <div class="lineInput">
-                    <label for="price1">Preço Unidade</label>
-                    <input type="text" id="price1" value="R$ 0,00" readonly>
-                </div>
-                <div class="lineInput">
-                    <label for="totalItem1">Preço Total</label>
-                    <input type="text" id="totalItem1" value="R$ 0,00" readonly>
+        <div id="hd">
+            <h1>Loja de Refrigerantes</h1>      
+        </div>
+    </header>
+    <main class="container">
+        <h2>Catálogo</h2>
+        <div id="cat">
+            <div class="lineInput">   
+                <label for="line1">Produtos</label>
+                <select id="line1" onchange="listPrice1(stock)" required></select>
+            </div>
+            <div class="lineInput">
+                <label for="quant1">Quantidade</label>
+                <input id="quant1" type="number" placeholder="0" onchange="listQuant1(stock)" required min="1">
+            </div>
+            <div class="lineInput">
+                <label for="price1">Preço Unidade</label>
+                <input type="text" id="price1" placeholder="R$ 0,00" data-und="0"readonly>
+            </div>
+            <div class="lineInput">
+                <label for="totalItem1">Preço Total</label>
+                <input type="text" id="totalItem1" placeholder="R$ 0,00" readonly>
+            </div>
+            <div class="market">
+                <div>
+                    <button onclick="listQuant1(stock)">Calcular</button>
+                    <button onclick="addProd(product), ended()">Adicionar</button>
                 </div>
                 <div class="market">
-                    <div>
-                        <button onclick="listQuant1(stock)">Calcular</button>
-                        <button onclick="addProd(product), ended()">Adicionar</button>
-                    </div>
-                    <div class="market">
-                        <div> <img src="assets/images/logoCocap.png" alt=""></div>
-                        <div> <img src="assets/images/logofantap.png" alt=""></div>
-                        <div> <img src="assets/images/guarana-logo-antarticap.png" alt=""></div>
-                        <div> <img src="assets/images/logoSpritep.png" alt=""></div>
-                        <div> <img src="assets/images/logosodap.png" alt=""></div>
-                        <div> <img src="assets/images/logoPurezap.png" alt=""></div>
-                    </div>
+                    <div><img src="assets/images/logoCocap.png" alt="Logo Coca-cola"></div>
+                    <div><img src="assets/images/logofantap.png" alt="Logo Fanta"></div>
+                    <div><img src="assets/images/guarana-logo-antarticap.png" alt="Logo Antártica"></div>
+                    <div><img src="assets/images/logoSpritep.png" alt="Logo Sprite"></div>
+                    <div><img src="assets/images/logosodap.png" alt="Logo Soda"></div>
+                    <div><img src="assets/images/logoPurezap.png" alt="Logo Pureza"></div>
                 </div>
-                </div>
-            </div>   
-        </main> 
-        <section>
-                <div class="car">
-                    <h2>Carrinho de Compras</h2>
-                    <img src="assets/images/carrinho.png" alt="">
-                </div>
-            <form action="#" method="GET" id="formSoda">
-                <div class="tb">
-                    <table>
-                        <thead>
-                            <th>ID</th>
-                            <th>Produto</th>
-                            <th>Qnt</th>
-                            <th>Und</th>
-                            <th>Total</th>
-                            <th>Ações</th>
-                        </thead>
-                        <tbody id="tbody">
-                        </tbody>
-                    </table>
-                </div>
-                    <br>
-                    <label for="priceTotal">
-                        <span>Total Compras</span>
-                        <input type="text" name="prt" id="priceTotal" value="0" placeholder="R$ 0,00" readonly>
-                    </label>
-
-                    <input id="btn" type="submit" value="Finalizar">
-            </form>   
-        </section>
+            </div>
+        </div>
+    </main>
+    <section>
+        <div id="car">
+            <h2>Carrinho de Compras</h2>
+            <img src="assets/images/carrinho.png" alt="Carrinho">
+        </div>
+        <form action="#" method="GET" id="formSoda">
+            <div id="tb">
+                <table>
+                    <thead>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Qnt</th>
+                        <th>Und</th>
+                        <th>Total</th>
+                        <th>Ações</th>
+                    </thead>
+                    <tbody id="tbody">
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <label for="priceTotal" id="labelPT">Total Compras</label>
+                <input type="text" name="prt" id="priceTotal" data-val="0" placeholder="R$ 0,00" readonly>           
+            </div>
+            <input id="btn" type="submit" value="Finalizar">
+        </form>
+    </section> 
     <footer class="End">&copy; Copyright - Todos os direitos reservados.</footer>   
     <script src="assets/js/script.js"></script>
 </body>
