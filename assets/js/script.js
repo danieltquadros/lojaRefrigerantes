@@ -1,3 +1,4 @@
+//Conexão com a API
 function toDoGet(url) {
     let request = new XMLHttpRequest()
     request.open("GET", url, false)
@@ -6,6 +7,9 @@ function toDoGet(url) {
 }
 const data = toDoGet("https://api.adsim.co/crm/api/v1/refrigerante/listar")
 let stock = JSON.parse(data)
+/*---------------------------------*/
+
+//Carregamento da lista de refrigerante no select
 let index = -1
 let output = `<option class="opt1" data-key="${index}">Selecione um refrigerante</option>`
 for( let soda of stock){
@@ -13,7 +17,9 @@ for( let soda of stock){
     output += `<option class="opt2" data-key="${index}">${soda.marca}/${soda.sabor} ${soda.quantidade}</option>`
 }
 document.querySelector('#line1').innerHTML = output
+/*---------------------------------*/
 
+//Função que imprime o preço do 1º item selecionado
 function listPrice1(stock) {
     //Área da função responsável por zerar todos os campos da 1ª linha caso o usuário altere o item escolhido
     let p = 0
@@ -28,6 +34,7 @@ function listPrice1(stock) {
     if(key != -1){
         p = stock[key].valor   
     }
+    document.querySelector('#price1').setAttribute('data-und', p)
     document.querySelector('#price1').value = p.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
 }
 /*---------------------------------*/
@@ -68,43 +75,57 @@ function addProd(product){
     let item = product.length + 1
     console.log(item)
     let prod = document.querySelector('#line1').value
-    let quant = document.querySelector('#quant1').value
-    let price = document.querySelector('#price1').value
-    let total = document.querySelector('#totalItem1').value
+    let quant = Number(document.querySelector('#quant1').value)
+    let price = Number(document.querySelector('#price1').getAttribute('data-und'))
+    let total = Number(document.querySelector('#totalItem1').getAttribute('data-val'))
     
     product.push({id: item, marcaSabor: prod, quantidade: quant, valor: price, total: total})
     console.log(product)
 
     for(let i of product){
         let tr = tbody.insertRow()
+        tr.setAttribute('data-id', i.id)
+        tr.id = `item${i.id}`
         let tdItem = tr.insertCell()
         let tdProd = tr.insertCell()
         let tdQuant = tr.insertCell()
         let tdPreco = tr.insertCell()
         let tdTotal = tr.insertCell()
         let tdImg = tr.insertCell()
+
         tdItem.innerText = i.id
         tdProd.innerText = i.marcaSabor
         tdQuant.innerText = i.quantidade
-        tdPreco.innerText = i.valor
-        tdTotal.innerText = i.total
+        tdPreco.innerText = i.valor.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+        tdTotal.innerText = i.total.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+
         let img = document.createElement('img')
         img.src = 'assets/images/delet.png'
-        img.setAttribute('onclick', `delet(product, ${item})`)
+        img.className = 'btnDel'
+        img.setAttribute('onclick', `delet(product, ${i.id})`)
         tdImg.appendChild(img)
-        item++
-    }
 
+        document.querySelector('#quant1').value = ''
+        document.querySelector('#price1').value = ''
+        document.querySelector('#totalItem1').value = ''
+    }
     return product
 }
 
 //Função responsável por excluir um item específico do carrinho de compras
 // IMCOMPLETA"!!!
 function delet(product, item){
-    console.log('Função incompleta')
-    /*for(let i = 0; i < product.length; i++){
+    console.log('Função IMCOMPLETA!')
+    /*document.querySelector('#priceTotal').setAttribute('data-val', 0)
+    let newT = 0
+    //console.log('Função incompleta')
+    for(let i = 0; i < product.length; i++){ 
+        newT += product[i].total
+        document.querySelector('#priceTotal').setAttribute('data-val', newT)
+        document.querySelector('#priceTotal').value = newT.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
         if(product[i].id == item){
-            product.splice(i, 1)
+            document.querySelector(`#item${i+1}`).remove()
+            delete product[i]
         }
     }
     console.log(product)*/
@@ -114,8 +135,7 @@ function delet(product, item){
 function ended() {
     let finish = 0
     finish += Number(document.querySelector('#totalItem1').getAttribute('data-val'))
-    finish += Number(document.querySelector('#priceTotal').value)
-    document.querySelector('#priceTotal').value = finish
-    return finish
+    finish += Number(document.querySelector('#priceTotal').getAttribute('data-val'))
+    document.querySelector('#priceTotal').setAttribute('data-val', finish)
+    document.querySelector('#priceTotal').value = finish.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
 }
-
