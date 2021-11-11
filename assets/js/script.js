@@ -43,78 +43,104 @@ function listPrice1(stock) {
 function listQuant1(stock) {
     let id = document.querySelector('#line1')
     let option = id.options[id.selectedIndex]
-    //Verifica se usuário digitou a quantidade sem escolher o item
-    if(option.classList.contains('opt1')){
-        alert('Selecione um refrigerante')
-        document.querySelector('#quant1').value = ''
-    /*---------------------------------*/
-    } else {
-        let key = Number(option.getAttribute('data-key'))
-        let qt = document.querySelector('#quant1').value
-        let total = stock[key].valor * qt
-        //Verifica se o usuário inseriu número negativo ou zero
-        if(qt < 1){
-            alert('Adicione a quantidade')
-            document.querySelector('#quant1').value = ''
-        /*---------------------------------*/
-        } else {
-            //impressão do total da linha 1
-            document.querySelector('#totalItem1').value = total.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
-            document.querySelector('#totalItem1').setAttribute('data-val', total)
-            /*---------------------------------*/
-        }
-    }  
+    let key = Number(option.getAttribute('data-key'))
+    let qt = document.querySelector('#quant1').value
+    let total = ''
+    if(key != -1){
+        total = stock[key].valor * qt
+        document.querySelector('#totalItem1').value = total.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+        document.querySelector('#totalItem1').setAttribute('data-val', total)
+    }        
 }
+/*---------------------------------*/
 
 let product = []
 
+//Função responsável pela validação de preenchimento dos campos do catálogo
+function prodVerification () {
+    let flag = 0
+    let id = document.querySelector('#line1')
+    let option = id.options[id.selectedIndex]
+    let qt = document.querySelector('#quant1').value
+    if(option.classList.contains('opt1') && qt < 1){
+        flag = 1
+    } else if (option.classList.contains('opt1')){
+        flag = 2
+    } else if (qt < 1){
+        flag = 3
+    }
+    return flag
+}
+/*---------------------------------*/
+
 //Função responsável por receber cada produto adicionado no carrinho de compras
 function addProd(product){
-    let tbody = document.querySelector('#tbody')
-    tbody.innerText = ''
-    let item = product.length + 1
-    console.log(item)
-    let prod = document.querySelector('#line1').value
-    let quant = Number(document.querySelector('#quant1').value)
-    let price = Number(document.querySelector('#price1').getAttribute('data-und'))
-    let total = Number(document.querySelector('#totalItem1').getAttribute('data-val'))
-    
-    product.push({id: item, marcaSabor: prod, quantidade: quant, valor: price, total: total})
-    console.log(product)
+    //Verificação com prodVerification e seus devidos alerts
+    if(prodVerification() == 1){
+        alert('Selecione um refrigerante e a quantidade para prosseguir')
+    } else if (prodVerification() == 2){
+        alert('Selecione um refrigerante para prosseguir')
+    } else if (prodVerification() == 3){
+        alert('Selecione a quantidade para prosseguir')
+    } else{
+    /*---------------------------------*/
 
-    for(let i of product){
-        let tr = tbody.insertRow()
-        tr.setAttribute('data-id', i.id)
-        tr.id = `item${i.id}`
-        let tdItem = tr.insertCell()
-        let tdProd = tr.insertCell()
-        let tdQuant = tr.insertCell()
-        let tdPreco = tr.insertCell()
-        let tdTotal = tr.insertCell()
-        let tdImg = tr.insertCell()
+        //Captura dos valores que foram preenchidos no catálogo e adicionados ao array product
+        let tbody = document.querySelector('#tbody')
+        tbody.innerText = ''
+        let item = product.length + 1
+        let prod = document.querySelector('#line1').value
+        let quant = Number(document.querySelector('#quant1').value)
+        let price = Number(document.querySelector('#price1').getAttribute('data-und'))
+        let total = Number(document.querySelector('#totalItem1').getAttribute('data-val'))
+        product.push({id: item, marcaSabor: prod, quantidade: quant, valor: price, total: total})
+        /*---------------------------------*/
+        
+        //Criação da tabela com os produtos adicionados ao carrinho
+        for(let i of product){
+            let tr = tbody.insertRow()
+            tr.setAttribute('data-id', i.id)
+            tr.id = `item${i.id}`
+            let tdItem = tr.insertCell()
+            let tdProd = tr.insertCell()
+            let tdQuant = tr.insertCell()
+            let tdPreco = tr.insertCell()
+            let tdTotal = tr.insertCell()
+            let tdImg = tr.insertCell()
+            /*---------------------------------*/
 
-        tdItem.innerText = i.id
-        tdProd.innerText = i.marcaSabor
-        tdQuant.innerText = i.quantidade
-        tdPreco.innerText = i.valor.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
-        tdTotal.innerText = i.total.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+            //Impressão da tabela de produtos no carrinho de compras
+            tdItem.innerText = i.id
+            tdProd.innerText = i.marcaSabor
+            tdQuant.innerText = i.quantidade
+            tdPreco.innerText = i.valor.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+            tdTotal.innerText = i.total.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+            /*---------------------------------*/
 
-        let img = document.createElement('img')
-        img.src = 'assets/images/delet.png'
-        img.className = 'btnDel'
-        img.setAttribute('onclick', `delet(product, ${i.id})`)
-        tdImg.appendChild(img)
+            //Adição do botão excluir para cada linha da tabela
+            let img = document.createElement('img')
+            img.src = 'assets/images/delet.png'
+            img.className = 'btnDel'
+            img.setAttribute('onclick', `delRow(product, ${i.id})`)
+            tdImg.appendChild(img)
+            /*---------------------------------*/
 
-        document.querySelector('#quant1').value = ''
-        document.querySelector('#price1').value = ''
-        document.querySelector('#totalItem1').value = ''
+            //Zerador do catálogo para a adição de novos produtos
+            document.querySelector('#line1').innerHTML = output
+            document.querySelector('#quant1').value = ''
+            document.querySelector('#price1').value = ''
+            document.querySelector('#totalItem1').value = ''
+            /*---------------------------------*/
+        }
+
+        ended()
+        return product
     }
-    return product
 }
 
 //Função responsável por excluir um item específico do carrinho de compras
 // IMCOMPLETA"!!!
-function delet(product, item){
+function delRow(product, item){
     console.log('Função IMCOMPLETA!')
     /*document.querySelector('#priceTotal').setAttribute('data-val', 0)
     let newT = 0
