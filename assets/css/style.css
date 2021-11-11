@@ -26,14 +26,16 @@ header {
     text-align: center;
     font-size: 2rem;
     font-weight:bold;
-    width: 100%;  
+    width: 100%;
+    text-shadow :3px 3px 9px rgb(0, 0, 0,0.5);  
 }
 
 main.container { 
     display: flex;
     justify-content: center; 
     align-content: center;
-    width: 100%;    
+    width: 100%;
+      
 }
 
 main h2 {
@@ -148,9 +150,11 @@ form {
     text-align: center;
     font-weight:bold ;
     color: #FF8650;
+    
 }
 
 form input{
+    font-size: 1em;
     margin-top: 1rem;
     text-align: center;
     width: 150px;
