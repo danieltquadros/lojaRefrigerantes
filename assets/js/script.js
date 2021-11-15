@@ -139,22 +139,21 @@ function addProd(product){
 }
 
 //Função responsável por excluir um item específico do carrinho de compras
-// IMCOMPLETA"!!!
 function delRow(product, item){
-    console.log('Função IMCOMPLETA!')
-    /*document.querySelector('#priceTotal').setAttribute('data-val', 0)
     let newT = 0
-    //console.log('Função incompleta')
-    for(let i = 0; i < product.length; i++){ 
-        newT += product[i].total
-        document.querySelector('#priceTotal').setAttribute('data-val', newT)
-        document.querySelector('#priceTotal').value = newT.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+    let index = 0
+    document.querySelector(`#item${item}`).remove()
+    for(let i = 0; i < product.length; i++){
         if(product[i].id == item){
-            document.querySelector(`#item${i+1}`).remove()
-            delete product[i]
+            product.splice(i,1)
         }
     }
-    console.log(product)*/
+    for(let i2 = 0; i2 < product.length; i2++){
+        newT += product[i2].total
+    }
+    document.querySelector('#priceTotal').setAttribute('data-val', newT)
+    document.querySelector('#priceTotal').value = newT.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+    return product
 }
 
 //Função que adiciona e atualiza o valor do campo Total de Compras
@@ -165,3 +164,4 @@ function ended() {
     document.querySelector('#priceTotal').setAttribute('data-val', finish)
     document.querySelector('#priceTotal').value = finish.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
 }
+/*---------------------------------*/
